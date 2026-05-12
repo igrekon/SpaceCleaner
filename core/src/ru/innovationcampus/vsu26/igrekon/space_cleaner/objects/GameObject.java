@@ -1,5 +1,7 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner.objects;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,7 +12,10 @@ public class GameObject {
 
 
     public static final float SCALE =0.05f ;
+    public final Body body;
     public int width;
+    public int height;
+    protected Texture texture;
 
 
     GameObject(String texturePath, int x, int y, int width, int height, World world) {
