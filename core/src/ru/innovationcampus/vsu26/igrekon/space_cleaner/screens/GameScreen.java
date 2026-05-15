@@ -12,6 +12,7 @@ import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSession;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.MyGdxGame;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameResources;
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.BulletObject;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.ShipObject;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.TrashObject;
 
@@ -22,11 +23,14 @@ public class GameScreen extends ScreenAdapter {
 
     ArrayList<TrashObject> trashArray;
 
+    ArrayList<BulletObject> bulletArray;
+
     public GameScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameSession = new GameSession();
 
         trashArray = new ArrayList<>();
+        bulletArray = new ArrayList<>();
 
         shipObject = new ShipObject(
                 GameSettings.SCREEN_WIDTH / 2, 150,
@@ -59,7 +63,19 @@ public class GameScreen extends ScreenAdapter {
 
         updateTrash();
 
+        updateBullets();
+
         draw();
+
+        if (shipObject.needToShoot()){
+            BulletObject laserBullet = new BulletObject(
+                    shipObject.getX(), shipObject.getY() + shipObject.height / 2,
+                    GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                    GameResources.BULLET_IMG_PATH,
+                    myGdxGame.world
+            );
+            bulletArray.add(laserBullet);
+        }
     }
 
     private void handleInput() {
@@ -78,6 +94,7 @@ public class GameScreen extends ScreenAdapter {
         myGdxGame.batch.begin();
         for (TrashObject trash : trashArray) trash.draw(myGdxGame.batch);
         shipObject.draw(myGdxGame.batch);
+        for (BulletObject bulletObject: bulletArray) bulletObject.draw(myGdxGame.batch);
         myGdxGame.batch.end();
 
     }
@@ -87,6 +104,14 @@ public class GameScreen extends ScreenAdapter {
             if (!trashArray.get(i).isInFrame()) {
                 myGdxGame.world.destroyBody(trashArray.get(i).body);
                 trashArray.remove(i--);
+            }
+        }
+    }
+    private void updateBullets(){
+        for (int i=0;i<bulletArray.size();i++){
+            if (bulletArray.get(i).hasToBeDestroyed()) {
+                myGdxGame.world.destroyBody(bulletArray.get(i).body);
+                bulletArray.remove(i--);
             }
         }
     }
