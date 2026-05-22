@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -15,12 +16,25 @@ public class GameObject {
     public final Body body;
     public int width;
     public int height;
+
+    int livesLeft;
+
+    public short cBits;
     protected Texture texture;
 
 
-    GameObject(String texturePath, int x, int y, int width, int height, World world) {
+
+    public void hit(){
+
+    }
+
+
+
+    GameObject(String texturePath, int x, int y, int width, int height, short cBits, World world) {
         this.width = width;
         this.height = height;
+        this.cBits = cBits;
+
 
         texture = new Texture(texturePath);
         body = createBody(x, y, world);
@@ -38,11 +52,13 @@ public class GameObject {
         circleShape.setRadius(Math.max(width, height) * SCALE / 2f);
 
         FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.filter.categoryBits = cBits;
         fixtureDef.shape = circleShape;
         fixtureDef.density = 0.1f;
         fixtureDef.friction = 1f;
 
-        body.createFixture(fixtureDef);
+        Fixture pop = body.createFixture(fixtureDef);
+        pop.setUserData(this);
         circleShape.dispose();
 
         body.setTransform(x * SCALE, y * SCALE, 0);

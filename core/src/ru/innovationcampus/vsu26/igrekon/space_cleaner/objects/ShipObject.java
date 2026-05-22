@@ -13,8 +13,9 @@ public class ShipObject extends GameObject {
     long lastShotTime;
 
     public ShipObject(int x, int y, int width, int height, String texturePath, World world) {
-        super(texturePath, x, y, width, height, world);
+        super(texturePath, x, y, width, height, GameSettings.SHIP_BIT, world);
         body.setLinearDamping(10);
+        livesLeft=3;
 
     }
 
@@ -53,6 +54,13 @@ public class ShipObject extends GameObject {
     public void draw(SpriteBatch batch) {
         putInFrame();
         super.draw(batch);
+    }
+    @Override
+    public void hit(){
+        livesLeft-=1;
+    }
+    public  boolean isAlive(){
+        return livesLeft > 0;
     }
 }
 

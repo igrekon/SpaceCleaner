@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.ContactManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSession;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.MyGdxGame;
@@ -20,6 +22,8 @@ public class GameScreen extends ScreenAdapter {
     MyGdxGame myGdxGame;
     GameSession gameSession;
     ShipObject shipObject;
+    ContactManager contactManager;
+
 
     ArrayList<TrashObject> trashArray;
 
@@ -31,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
 
         trashArray = new ArrayList<>();
         bulletArray = new ArrayList<>();
+        contactManager = new ContactManager(myGdxGame.world);
 
         shipObject = new ShipObject(
                 GameSettings.SCREEN_WIDTH / 2, 150,
@@ -67,6 +72,10 @@ public class GameScreen extends ScreenAdapter {
 
         draw();
 
+        if (!shipObject.isAlive()){
+            System.out.println("Game over!");
+        }
+
         if (shipObject.needToShoot()){
             BulletObject laserBullet = new BulletObject(
                     shipObject.getX(), shipObject.getY() + shipObject.height / 2,
@@ -101,7 +110,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateTrash() {
         for (int i = 0; i < trashArray.size(); i++) {
-            if (!trashArray.get(i).isInFrame()) {
+            if (!trashArray.get(i).isInFrame() || !trashArray.get(i).isAlive()) {
                 myGdxGame.world.destroyBody(trashArray.get(i).body);
                 trashArray.remove(i--);
             }
