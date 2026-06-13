@@ -17,7 +17,7 @@ public class GameObject {
     public int width;
     public int height;
 
-    int livesLeft;
+    public int livesLeft;
 
     public short cBits;
     protected Texture texture;

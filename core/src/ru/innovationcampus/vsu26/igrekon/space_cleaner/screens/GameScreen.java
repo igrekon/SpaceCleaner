@@ -1,24 +1,27 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner.screens;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 
-import ru.innovationcampus.vsu26.igrekon.space_cleaner.ContactManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSession;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.MyGdxGame;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameResources;
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.SpecialGarbageView;
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.managers.ContactManager;
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.managers.MemoryManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.BulletObject;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.ShipObject;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.TrashObject;
 
 public class GameScreen extends ScreenAdapter {
+    ArrayList<SpecialGarbageView> specialGarbageList = new ArrayList<>();
     MyGdxGame myGdxGame;
     GameSession gameSession;
     ShipObject shipObject;
@@ -84,6 +87,26 @@ public class GameScreen extends ScreenAdapter {
                     myGdxGame.world
             );
             bulletArray.add(laserBullet);
+        }
+        for (int i = specialGarbageList.size() - 1; i >= 0; i--) {
+            SpecialGarbageView specialTrash = specialGarbageList.get(i);
+            specialTrash.update(delta);
+
+            // Если наш корабль (shipView) поймал особый мусор
+            if (ShipObject.getHitBox().overlaps(specialTrash.getHitBox())) {
+
+                // Прибавляем БОНУСНЫЕ очки (например, +15) к текущему счету игры
+                myGdxGame.score += specialTrash.getScoreValue();
+
+                // Удаляем объект из игры
+                specialTrash.dispose();
+                specialGarbageList.remove(i);
+            }
+            // Если мусор просто улетел за нижний край экрана
+            else if (specialTrash.y < -specialTrash.height) {
+                specialTrash.dispose();
+                specialGarbageList.remove(i);
+            }
         }
     }
 
