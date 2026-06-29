@@ -30,4 +30,6 @@ public class TrashObject extends GameObject{
     public  boolean isAlive(){
         return livesLeft > 0;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner;
 
+import static java.awt.Color.WHITE;
+import static ru.innovationcampus.vsu26.igrekon.space_cleaner.GameResources.FONT_PATH;
 import static ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings.POSITION_ITERATIONS;
 import static ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings.STEP_TIME;
 import static ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings.VELOCITY_ITERATIONS;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.MovingBackgroundView;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.managers.AudioManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.screens.GameScreen;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.screens.MenuScreen;
@@ -32,6 +35,11 @@ public class MyGdxGame extends Game {
 	public SpriteBatch batch;
 	public OrthographicCamera camera;
 	public AudioManager audioManager;
+	public MovingBackgroundView movingBackgroundView;
+
+
+
+
 
 	public GameScreen gameScreen;
 	public MenuScreen menuScreen;
@@ -40,15 +48,16 @@ public class MyGdxGame extends Game {
 
 	float accumulator = 0;
 
+
 	@Override
 	public void create() {
 
 		Box2D.init();
 		world = new World(new Vector2(0, 0), true);
 
-		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
-		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
-		commonBlackFont = FontBuilder.generate(24, Color.BLACK, GameResources.FONT_PATH);
+		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, FONT_PATH);
+		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, FONT_PATH);
+		commonBlackFont = FontBuilder.generate(24, Color.BLACK, FONT_PATH);
 
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -58,6 +67,8 @@ public class MyGdxGame extends Game {
 		gameScreen = new GameScreen(this);
 		menuScreen = new MenuScreen(this);
 		settingsScreen = new SettingsScreen(this);
+		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
+
 
 		setScreen(menuScreen);
 	}

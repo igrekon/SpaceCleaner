@@ -11,7 +11,7 @@ import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 
 public class ShipObject extends GameObject {
 
-    private static Circle hitBox;
+    public static Circle hitBox;
     long lastShotTime;
     int livesLeft;
 
@@ -22,13 +22,7 @@ public class ShipObject extends GameObject {
 
     }
 
-    public static Circle getHitBox() {
-        return hitBox;
-    }
 
-    public static void setHitBox(Circle hitBox) {
-        ShipObject.hitBox = hitBox;
-    }
 
     public int getLiveLeft() {
         return livesLeft;

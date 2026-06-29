@@ -2,8 +2,10 @@ package ru.innovationcampus.vsu26.igrekon.space_cleaner.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class ImageView extends View {
     Texture texture;
+    ImageView fullBlackoutView;
 
     public ImageView(float x, float y, String imagePath) {
         super(x, y);

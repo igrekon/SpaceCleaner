@@ -9,6 +9,7 @@ public class TextView extends View{
     protected BitmapFont font;
     protected String text;
 
+
     public TextView(BitmapFont font, float x, float y) {
         super(x, y);
         this.font = font;

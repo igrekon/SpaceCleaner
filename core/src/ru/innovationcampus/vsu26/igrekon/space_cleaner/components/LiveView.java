@@ -9,9 +9,9 @@ public class LiveView extends View {
 
     private final static int livePadding = 6;
 
-    private Texture texture;
+    Texture texture;
 
-    private int leftLives;
+    int leftLives;
 
     public LiveView(float x, float y) {
         super(x, y);
@@ -27,13 +27,11 @@ public class LiveView extends View {
 
 
     public void draw(SpriteBatch batch) {
-        if (leftLives > 0) batch.draw(texture, x + (texture.getWidth() + livePadding), y, width, height);
+        if (leftLives > 0)
+            batch.draw(texture, x + (texture.getWidth() + livePadding), y, width, height);
         if (leftLives > 1) batch.draw(texture, x, y, width, height);
-        if (leftLives > 2) batch.draw(texture, x + 2 * (texture.getWidth() + livePadding), y, width, height);
+        if (leftLives > 2)
+            batch.draw(texture, x + 2 * (texture.getWidth() + livePadding), y, width, height);
     }
 
-    @Override
-    public void dispose() {
-        texture.dispose();
-    }
 }

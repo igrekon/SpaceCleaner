@@ -17,20 +17,14 @@ public class GameObject {
     public int width;
     public int height;
 
-    public int livesLeft;
+
 
     public short cBits;
-    protected Texture texture;
+    Texture texture;
 
 
 
-    public void hit(){
-
-    }
-
-
-
-    GameObject(String texturePath, int x, int y, int width, int height, short cBits, World world) {
+    public GameObject(String texturePath, int x, int y, int width, int height, short cBits, World world) {
         this.width = width;
         this.height = height;
         this.cBits = cBits;
@@ -38,6 +32,9 @@ public class GameObject {
 
         texture = new Texture(texturePath);
         body = createBody(x, y, world);
+    }
+    public void hit(){
+
     }
 
     private Body createBody(float x, float y, World world) {
@@ -56,9 +53,9 @@ public class GameObject {
         fixtureDef.shape = circleShape;
         fixtureDef.density = 0.1f;
         fixtureDef.friction = 1f;
+        Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData(this);
 
-        Fixture pop = body.createFixture(fixtureDef);
-        pop.setUserData(this);
         circleShape.dispose();
 
         body.setTransform(x * SCALE, y * SCALE, 0);
@@ -84,5 +81,8 @@ public class GameObject {
 
     public void draw(SpriteBatch batch) {
         batch.draw(texture, getX() - (width / 2f), getY() - (height / 2f), width, height);
+    }
+    public void dispose(){
+        texture.dispose();
     }
 }

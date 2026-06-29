@@ -1,5 +1,9 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner.components;
 
+import static java.awt.SystemColor.text;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -7,6 +11,8 @@ public class View implements Disposable {
 
     float x;
     float y;
+
+
 
     float width;
     float height;
@@ -28,9 +34,12 @@ public class View implements Disposable {
     }
 
     public void draw(SpriteBatch batch) {
+
+
     }
 
     @Override
     public void dispose() {
+
     }
 }
