@@ -32,7 +32,6 @@ import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.ShipObject;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.TrashObject;
 
 public class GameScreen extends ScreenAdapter {
-    ArrayList<SpecialGarbageView> specialGarbageList = new ArrayList<>();
     MyGdxGame myGdxGame;
     GameSession gameSession;
 
