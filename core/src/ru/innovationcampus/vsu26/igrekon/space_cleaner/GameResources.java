@@ -18,6 +18,6 @@ public class GameResources {
     public static final String SHOOT_SOUND_PATH = "sounds/destroy.mp3";
     public static final String DESTROY_SOUND_PATH = "sounds/shoot.mp3";
     public static final String BLACKOUT_MIDDLE_IMG_PATH = "textures/background.png";
-    public static final String GARBAGE_BAG_IMG_PATH = "textures/img.png";
+    public static final String GARBAGE_BAG_IMG_PATH = "textures/extratrash.png";
 
 }

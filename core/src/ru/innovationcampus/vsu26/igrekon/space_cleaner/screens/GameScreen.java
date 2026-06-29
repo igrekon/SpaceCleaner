@@ -131,6 +131,14 @@ public class GameScreen extends ScreenAdapter {
                 trashArray.add(trashObject);
             }
 
+            if (Math.random()<0.1){
+//                trashArray.get(trashObject)
+//                else
+
+
+
+            }
+
             gameSession.updateScore();
             scoreTextView.setText("Score: " + gameSession.getScore());
 

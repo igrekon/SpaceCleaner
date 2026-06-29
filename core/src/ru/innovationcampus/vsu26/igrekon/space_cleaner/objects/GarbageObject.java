@@ -10,7 +10,7 @@ public class GarbageObject extends GameObject {
     private final int radius;
     private boolean isCollected;
 
-    // 1. Первый конструктор (вызывает родительский super)
+
     public GarbageObject(String texturePath, int x, int y, int width, int height, short cBits, World world, int points, int radius) {
         super(texturePath, x, y, width, height, cBits, world);
         this.points = points;
@@ -45,7 +45,7 @@ public class GarbageObject extends GameObject {
         }
     }
 
-    // Метод сбора
+
     public int collect() {
         if (!isCollected) {
             isCollected = true;
@@ -56,7 +56,7 @@ public class GarbageObject extends GameObject {
 
 
     public boolean isOutOfBounds(int screenHeight) {
-        // Если у вас в GameObject координаты хранятся в body или в полях x, y:
+
         if (this.body != null) {
             return this.body.getPosition().y < -50; // Для Box2D, если экран идет вверх от 0
         }

@@ -14,6 +14,8 @@ public class GameSession {
     private int score;
     int destructedTrashNumber;
 
+    int extrasTrashnumber;
+
     public GameSession(){
 
     }
@@ -52,7 +54,8 @@ public class GameSession {
     }
 
     public void destructionRegistration() {
-        destructedTrashNumber += 1;
+        destructedTrashNumber += extrasTrashnumber;
+
     }
 
     public void updateScore() {

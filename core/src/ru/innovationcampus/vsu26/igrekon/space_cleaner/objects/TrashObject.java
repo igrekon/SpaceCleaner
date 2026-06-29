@@ -5,15 +5,19 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.Random;
 
+import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSession;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 
 public class TrashObject extends GameObject{
     public int livesLeft;
+
+    int ExtraScores;
     public static final int paddingHorizontal=30;
     public TrashObject( int width, int height, String texturePath, World world) {
         super(texturePath,width/2+paddingHorizontal+(new Random()).nextInt((GameSettings.SCREEN_WIDTH-2*paddingHorizontal-width)),GameSettings.SCREEN_HEIGHT+height/2,width,height, GameSettings.TRASH_BIT,world);
         body.setLinearVelocity(new Vector2(0,-GameSettings.TRASH_VELOCITY));
         livesLeft =1;
+        ExtraScores=2;
 
     }
 
@@ -24,6 +28,11 @@ public class TrashObject extends GameObject{
     @Override
     public void hit(){
         livesLeft-=1;
+    }
+
+
+    public int getExtraScores(){
+        return ExtraScores+=1;
     }
 
 
