@@ -1,11 +1,10 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner.components;
 
-import static ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.ShipObject.hitBox;
+import static ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.Ball.hitBox;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
 
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameResources;

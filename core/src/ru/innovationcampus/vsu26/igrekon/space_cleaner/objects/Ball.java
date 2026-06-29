@@ -9,13 +9,13 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.GameSettings;
 
-public class ShipObject extends GameObject {
+public class Ball extends GameObject {
 
     public static Circle hitBox;
     long lastShotTime;
     int livesLeft;
 
-    public ShipObject(int x, int y, int width, int height, String texturePath, World world) {
+    public Ball(int x, int y, int width, int height, String texturePath, World world) {
         super(texturePath, x, y, width, height, GameSettings.SHIP_BIT, world);
         body.setLinearDamping(10);
         livesLeft=3;
@@ -28,13 +28,13 @@ public class ShipObject extends GameObject {
         return livesLeft;
     }
 
-    public boolean needToShoot() {
-        if (TimeUtils.millis() - lastShotTime >= GameSettings.SHOOTING_COOL_DOWN) {
-            lastShotTime = TimeUtils.millis();
-            return true;
-        }
-        return false;
-    }
+//    public boolean needToShoot() {
+//        if (TimeUtils.millis() - lastShotTime >= GameSettings.SHOOTING_COOL_DOWN) {
+//            lastShotTime = TimeUtils.millis();
+//            return true;
+//        }
+//        return false;
+//    }
 
     public void move(Vector3 vector3) {
         body.applyForceToCenter(new Vector2(
@@ -70,6 +70,10 @@ public class ShipObject extends GameObject {
     }
     public  boolean isAlive(){
         return livesLeft > 0;
+    }
+
+    public boolean isInFrame() {
+
     }
 }
 
