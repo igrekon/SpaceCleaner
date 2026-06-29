@@ -1,9 +1,6 @@
 package ru.innovationcampus.vsu26.igrekon.space_cleaner.screens;
 
 
-import static java.awt.Color.WHITE;
-import static ru.innovationcampus.vsu26.igrekon.space_cleaner.GameResources.FONT_PATH;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -26,9 +23,7 @@ import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.ImageView;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.LiveView;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.MovingBackgroundView;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.RecordListView;
-import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.SpecialGarbageView;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.TextView;
-import ru.innovationcampus.vsu26.igrekon.space_cleaner.components.View;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.managers.ContactManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.managers.MemoryManager;
 import ru.innovationcampus.vsu26.igrekon.space_cleaner.objects.BulletObject;
@@ -83,12 +78,12 @@ public class GameScreen extends ScreenAdapter {
         gameSession = new GameSession();
         liveView = new LiveView(305,1215);
         pauseButton = new ButtonView(605, 1200, 46, 54, GameResources.PAUSE_IMG_PATH);
-        commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
+        commonWhiteFont = FontBuilder.generate(100, Color.WHITE, GameResources.FONT_PATH);
         scoreTextView = new TextView(myGdxGame.commonWhiteFont, 50, 1215);
         fullBlackoutView =new ImageView(0,160,GameResources.BLACKOUT_FULL_IMG_PATH);
-        continueButton = new ButtonView(605,1200,46,24,GameResources.BUTTON_SHORT_BG_IMG_PATH);
+        continueButton = new ButtonView(300,900,26,24,GameResources.BUTTON_SHORT_BG_IMG_PATH);
         homeButton = new ButtonView(300,55,45,64,GameResources.BUTTON_SHORT_BG_IMG_PATH);
-        pauseTextView = new TextView(myGdxGame.commonWhiteFont,40,1000);
+        pauseTextView = new TextView(myGdxGame.commonWhiteFont,300,900,"Pause");
 
 
 
@@ -168,14 +163,15 @@ public class GameScreen extends ScreenAdapter {
 
             updateBullets();
             backgroundView.move();
-            scoreTextView.setText("Score:" + 100);
+//            scoreTextView.setText("Score:" );
             liveView.setLeftLives(shipObject.getLiveLeft());
 
             myGdxGame.stepWorld();
 
-            draw();
+
 
         }
+        draw();
     }
 
     private void restartGame() {
@@ -217,7 +213,7 @@ public class GameScreen extends ScreenAdapter {
                         gameSession.resumeGame();
                     }
                     if (homeButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                        System.out.println("end of game");
+                        myGdxGame.setScreen(myGdxGame.menuScreen);
                     }
                     break;
                 case ENDED:
